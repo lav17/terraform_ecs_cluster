@@ -55,6 +55,23 @@ data "aws_ssm_parameter" "ecs_node_ami" {
   name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
 }
 
+resource "aws_security_group" "ec2_sg" {
+  name = "ec2_sg"
+  ingress {
+    from_port = 3000
+    to_port   = 3000
+    protocol  = "tcp"
+    #cidr_blocks = ["0.0.0.0/0"]
+    prefix_list_ids = [var.TF_VAR_CLOUDFRONT_IP]
+  }
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_launch_template" "ecs_ec2" {
   name_prefix   = "demo-ecs-ec2-node"
   image_id      = data.aws_ssm_parameter.ecs_node_ami.value
@@ -62,7 +79,7 @@ resource "aws_launch_template" "ecs_ec2" {
 
   network_interfaces {
     associate_public_ip_address = true
-    security_groups             = [var.ecs-ec2-sg]
+    security_groups             = [aws_security_group.ec2_sg.id]
   }
   key_name = "demo"
 
@@ -165,7 +182,6 @@ resource "aws_ecs_service" "demo-ecs" {
 
 
 #load balancer
-
 resource "aws_security_group" "lb_sg" {
   name = "lb_sg"
   ingress {
@@ -173,7 +189,7 @@ resource "aws_security_group" "lb_sg" {
     to_port   = 80
     protocol  = "tcp"
     #cidr_blocks = ["0.0.0.0/0"]
-    prefix_list_ids = []
+    prefix_list_ids = [var.TF_VAR_CLOUDFRONT_IP]
   }
   egress {
     protocol    = "-1"

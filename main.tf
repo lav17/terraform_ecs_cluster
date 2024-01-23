@@ -22,7 +22,6 @@ module "ecr_module" {
 module "ecs-cluster" {
   source                = "./modules/ecs"
   demo_app_cluster_name = local.demo_app_cluster_name
-  ecs-ec2-sg            = local.ecs-ec2-sg
   ecr_repo_url          = module.ecr_module.repo_url
   TF_VAR_CLOUDFRONT_IP  = var.TF_VAR_CLOUDFRONT_IP
 }

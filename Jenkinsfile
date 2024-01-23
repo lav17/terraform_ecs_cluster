@@ -37,6 +37,19 @@ pipeline {
                         """
                     }
                 }
+       }
+
+       stage('Terraform Destroy') {
+            steps {
+                
+                    script {
+                        bat """
+                            terraform destroy \
+                                -var TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP} \
+                                -auto-approve
+                        """
+                    }
+                }
            }
         
     }
