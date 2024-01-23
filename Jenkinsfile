@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build project') {
             steps {
-                git branch: 'master', url: 'https://github.com/lav17/Terraform_nodejs_app.git'
+                git branch: 'master', url: 'https://github.com/lav17/terraform_ecs_cluster.git'
             }
         }
 
