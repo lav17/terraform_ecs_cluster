@@ -2,9 +2,9 @@
 
 set REPO_NAME=docker_ecr_repo
 set TAG=docker_ecr_repo
+set AWS_REGION=ap-south-1
 
 for /f "tokens=*" %%i in ('aws sts get-caller-identity --query "Account" --output text') do set AWS_ACCOUNT_ID=%%i
-for /f "tokens=*" %%i in ('aws configure get region') do set AWS_REGION=%%i
 
 set ECR_REPO=%AWS_ACCOUNT_ID%.dkr.ecr.%AWS_REGION%.amazonaws.com/%REPO_NAME%
 
