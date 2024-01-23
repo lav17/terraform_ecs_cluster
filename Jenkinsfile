@@ -20,8 +20,8 @@ pipeline {
                     script {
                         bat """
                             terraform init \
-                                -var 'AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}' \
-                                -var 'AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}' \
+                                -var AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
+                                -var AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY} \
                                 -var TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP}  \
                                 -input=false
                         """
@@ -36,8 +36,8 @@ pipeline {
                     script {
                         bat """
                             terraform apply \
-                                -var 'AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}' \
-                                -var 'AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}' \
+                                -var AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
+                                -var AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY} \
                                 -var TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP} \
                                 -auto-approve
                         """
@@ -51,8 +51,8 @@ pipeline {
                     script {
                         bat """
                             terraform destroy \
-                                -var 'AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}' \
-                                -var 'AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}' \
+                                -var AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
+                                -var AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY} \
                                 -var TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP} \
                                 -auto-approve
                         """
