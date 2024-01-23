@@ -18,7 +18,7 @@ pipeline {
                     script {
                         bat """
                             terraform init \
-                                -var 'TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP}' \
+                                -var TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP}  \
                                 -input=false
                         """
                     }
