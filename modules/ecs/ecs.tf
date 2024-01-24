@@ -61,7 +61,7 @@ resource "aws_security_group" "ec2_sg" {
     from_port       = 3000
     to_port         = 3000
     protocol        = "tcp"
-    security_groups = [aws_security_group.lb_sg.name]
+    security_groups = [aws_security_group.lb_sg.id]
   }
   egress {
     protocol    = "-1"
