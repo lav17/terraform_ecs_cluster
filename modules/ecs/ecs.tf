@@ -61,7 +61,7 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = [aws_security_group.lb_sg.name]
+    cidr_blocks = [aws_security_group.lb_sg.id]
   }
   egress {
     protocol    = "-1"
@@ -69,6 +69,7 @@ resource "aws_security_group" "ec2_sg" {
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
+  depends_on = [aws_security_group.lb_sg]
 }
 
 resource "aws_launch_template" "ecs_ec2" {
