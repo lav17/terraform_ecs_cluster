@@ -30,20 +30,7 @@ pipeline {
         }
         
 
-        stage('Terraform Apply') {
-            steps {
-                
-                    script {
-                        bat """
-                            terraform apply \
-                                -var AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
-                                -var AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY} \
-                                -var TF_VAR_CLOUDFRONT_IP=${env.TF_VAR_CLOUDFRONT_IP} \
-                                -auto-approve
-                        """
-                    }
-                }
-       }
+
 
        stage('Terraform Destroy') {
             steps {
