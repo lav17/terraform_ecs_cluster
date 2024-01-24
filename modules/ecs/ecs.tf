@@ -58,10 +58,10 @@ data "aws_ssm_parameter" "ecs_node_ami" {
 resource "aws_security_group" "ec2_sg" {
   name = "ec2_sg"
   ingress {
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
-    cidr_blocks = [aws_security_group.lb_sg.id]
+    from_port       = 3000
+    to_port         = 3000
+    protocol        = "tcp"
+    security_groups = [aws_security_group.lb_sg.name]
   }
   egress {
     protocol    = "-1"
